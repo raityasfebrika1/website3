@@ -1,22 +1,21 @@
 name: Deploy Website3
 
 on:
- push:
-  branches: Website3
+  push:
+    branches: Website3
 
 jobs:
- Deploy:
-  runs-on: ubuntu-latest
+  Deploy:
+    runs-on: ubuntu-latest
 
-  steps:
-   - name: Deploy website3 to server via ssh
-     uses: appleboy/ssh-action@v1.0.3
-     with:
-        host: ${{secrets.IP_SERVER}}
-        username: ${{secrets.USER_SERVER}}
-        key: ${{secrets.PRIVATE_KEY_SERVER}}
-        port: 777
-        script:
-          cd /var/www/rahma
-          git pull origin main
-          sudo systemctl restart nginx
+    steps:
+      - name: Deploy website3 to server via ssh
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.IP_SERVER}}
+          username: ${{secrets.USER_SERVER}}
+          key: ${{secrets.PRIVATE_KEY_SERVER}}
+          port: 777
+          script: cd /var/www/rahma
+            git pull origin main
+            sudo systemctl restart nginx
